@@ -2,9 +2,11 @@ import requests
 import threading
 from netaddr import IPNetwork
 
+from lib.ConsoleHandler import *
+
 class Scanner:
     def __init__(self):
-        pass
+        self.msg = ConsoleHandler()
 
     def scan_server(self, ip, user_agent, count_results):
         try:
@@ -13,14 +15,14 @@ class Scanner:
             response_code_http = check_http.status_code
             server_name_http = check_http.headers.get('Server')
             if check_http.url.startswith('http'):
-                print(f"http://{ip} [{server_name_http}] [{response_code_http}]")
+                self.msg.info(f"http://{ip} [{server_name_http}] [{response_code_http}]")
                 count_results[0] += 1
 
             check_https = requests.get("https://" + str(ip), headers=headers, timeout=3)
             response_code_https = check_https.status_code
             server_name_https = check_https.headers.get('Server')
             if check_https.url.startswith('https://'):
-                print(f"https://{ip} [{server_name_https}] [{response_code_https}]")
+                self.msg.info(f"https://{ip} [{server_name_https}] [{response_code_https}]")
                 count_results[0] += 1
         except requests.exceptions.RequestException:
             pass
@@ -41,5 +43,4 @@ class Scanner:
     def start_scanner(self, ip, user_agent):
         ip_network = IPNetwork(ip)
         count_results = self.scan_servers(ip_network, user_agent)
-        print("")
-        print(f"[+] Found {count_results} results.")
+        self.msg.success(f"Found {count_results} results")
