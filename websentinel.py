@@ -12,6 +12,8 @@ def main():
 	parser = argparse.ArgumentParser(description='')
 	parser.add_argument('--url', help='URL to crawl webpage.')
 	parser.add_argument('--ip', help='IP address or IP range to scan servers.')
+    parser.add_argument('--domain', help='Add a domain name without the www sub at the beginning.')
+    parser.add_argument('--pdf-spider', help='Spider crawl all PDF files from a given URL')
 	parser.add_argument('--useragent', default=default_useragent(), help='Add a user-agent.')
 	args = parser.parse_args()
 
@@ -21,6 +23,8 @@ def main():
 	elif args.ip:
 		scanner = Scanner()
 		scanner.start_scanner(args.ip, args.useragent)
+    elif args.domain:
+        # I'll back for this/part tommorow bro, lol.
 
 if __name__ == "__main__":
 	main()
