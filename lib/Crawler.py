@@ -88,4 +88,4 @@ class Crawler:
         sitemap_url = url + "/" + "sitemap_index.xml"
         sitemap_response = requests.get(sitemap_url)
         if sitemap_response.status_code == 200:
-            self.handle_sitemap()
+            self.handle_sitemap(url, sitemap_response)
