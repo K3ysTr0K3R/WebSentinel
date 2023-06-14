@@ -8,6 +8,7 @@ class Scanner:
         self.msg = ConsoleHandler()
 
     def scan_server(self, ip, user_agent, count_results):
+        print("")
         try:
             headers = {'User-Agent': user_agent}
             check_http = requests.get("http://" + str(ip), headers=headers, timeout=3)
@@ -42,4 +43,5 @@ class Scanner:
     def start_scanner(self, ip, user_agent):
         ip_network = IPNetwork(ip)
         count_results = self.scan_servers(ip_network, user_agent)
+        print("")
         self.msg.success(f"Found {count_results} results")
