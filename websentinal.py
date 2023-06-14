@@ -2,7 +2,8 @@
 
 import argparse
 from lib.Scanner import *
-from lib.Crawler import *
+from lib.Crawfrom import *
+from lib.ConsoleHandler import *
 
 def default_useragent():
 	return "Mozilla/5.0 (Linux; Android 12; SAMSUNG SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/19.0 Chrome/102.0.5005.125 Mobile Safari/537.36"
