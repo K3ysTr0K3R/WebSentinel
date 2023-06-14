@@ -3,12 +3,12 @@ import requests
 main_domain = "love.com"
 with open('subdomains-top1mil-20000.txt', 'r') as wordlist:
     for subdomain in wordlist.read().split('\n'):
-        url = "http://" + subdomain + "." + main_domain
+        subdomain_url = "http://" + subdomain + "." + main_domain
         try:
-            response = requests.get(url, timeout=5)
-            if response.url.startswith('https'):
-                print(response.url)
+            subdomain_url_response = requests.get(subdomain_url, timeout=5)
+            if subdomain_url_response.url.startswith('https'):
+                print(subdomain_url_response.url)
             else:
-                print(response.url)
+                print(subdomain_url_response.url)
         except requests.exceptions.RequestException:
             pass
