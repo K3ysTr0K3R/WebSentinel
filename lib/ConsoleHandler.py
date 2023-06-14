@@ -10,6 +10,5 @@ class ConsoleHandler:
     def success(self, message):
         print(colored('[+] ', 'green') + message)
 
-    def info(self, message):
-        print(colored('[*] ', 'yellow') + message)
-
+    def info(self, ip_address, server_name, response_code):
+        print(colored('[*] ', 'yellow') + colored(ip_address, 'cyan') + f" [{server_name}] [{response_code}]")
