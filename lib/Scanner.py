@@ -3,12 +3,13 @@ import threading
 from netaddr import IPNetwork
 from lib.ConsoleHandler import *
 
+print("")
 class Scanner:
     def __init__(self):
         self.msg = ConsoleHandler()
 
     def scan_server(self, ip, user_agent, count_results):
-        print("")
+
         try:
             headers = {'User-Agent': user_agent}
             check_http = requests.get("http://" + str(ip), headers=headers, timeout=3)
