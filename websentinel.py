@@ -2,7 +2,7 @@
 
 import argparse
 from lib.Scanner import *
-from lib.Crawfrom import *
+from lib.Crawler import *
 from lib.ConsoleHandler import *
 
 def default_useragent():
