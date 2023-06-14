@@ -1,15 +1,14 @@
 import requests
 
-main_domain = "porn.com"
+main_domain = "love.com"
 with open('subdomains-top1mil-20000.txt', 'r') as wordlist:
     for subdomain in wordlist.read().split('\n'):
-        subdomain_url = "http://" + subdomain + "." + main_domain
+        url = "http://" + subdomain + "." + main_domain
         try:
-            subdomain_url_http_https = requests.get(subdomain_url)
-            if subdomain_url_http_https.url.startswith('http'):
-                response_code = subdomain_url_http_https.status_code
-                if response_code == 200:
-                    print(subdomain_url)
-            #elif
+            response = requests.get(url, timeout=5)
+            if response.url.startswith('https'):
+                print(response.url)
+            else:
+                print(response.url)
         except requests.exceptions.RequestException:
             pass
