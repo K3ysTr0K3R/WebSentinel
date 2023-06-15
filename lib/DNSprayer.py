@@ -1,8 +1,8 @@
 import requests
 import threading
-from lib.ConsoleHandler import *
+from lib.ConsoleHandler import ConsoleHandler
 
-class Scanner:
+class DNSprayer:
     def __init__(self):
         self.msg = ConsoleHandler()
 
@@ -37,7 +37,3 @@ class Scanner:
 
         for thread in threads:
             thread.join()
-
-scanner = Scanner()
-main_domain = 'love.com'
-threading.Thread(target=scanner.dns_enum, args=(main_domain,)).start()
