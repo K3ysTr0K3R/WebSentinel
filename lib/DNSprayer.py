@@ -6,11 +6,11 @@ class DNSprayer:
     def __init__(self):
         self.msg = ConsoleHandler()
 
-    def dns_enum(self, main_domain):
+    def start_dns_enumeration(self, main_domain):
         subdomains = []
         with open('subdomains-top1mil-20000.txt', 'r') as wordlist:
             subdomains = wordlist.read().split('\n')
-        batch_size = 100
+        batch_size = 1000
         num_threads = len(subdomains) // batch_size + 1
 
         def process_batch(subdomains_batch):
@@ -18,7 +18,7 @@ class DNSprayer:
             for subdomain in subdomains_batch:
                 subdomain_url = "http://" + subdomain + "." + main_domain
                 try:
-                    subdomain_url_response = session.get(subdomain_url, timeout=3)
+                    subdomain_url_response = session.get(subdomain_url, timeout=5)
                     if subdomain_url_response.url.startswith('https'):
                         self.msg.more_info(subdomain_url_response.url)
                     else:
