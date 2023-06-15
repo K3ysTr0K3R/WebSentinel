@@ -17,4 +17,4 @@ class ConsoleHandler:
         print(colored('[*] ', 'yellow') + colored(ip_address, 'cyan') + f" [{server_name}] [{response_code}]")
 
     def more_info(self, subdomain_url_response_url):
-        print(colored('[' + time_date + '] ', 'cyan') + colored('[INFO]', 'green') + colored(' ['+ subdomain_url_response_url  + ']'))
+        print(colored('[' + time_date + '] ', 'cyan') + colored('[INFO] ', 'green') + colored(subdomain_url_response_url, 'white'))
