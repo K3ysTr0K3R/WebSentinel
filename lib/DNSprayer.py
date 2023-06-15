@@ -18,7 +18,7 @@ class DNSprayer:
             for subdomain in subdomains_batch:
                 subdomain_url = "http://" + subdomain + "." + main_domain
                 try:
-                    subdomain_url_response = session.get(subdomain_url, timeout=5)
+                    subdomain_url_response = session.get(subdomain_url, timeout=3)
                     if subdomain_url_response.url.startswith('https'):
                         self.msg.more_info(subdomain_url_response.url)
                     else:
