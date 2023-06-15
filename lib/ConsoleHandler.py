@@ -1,20 +1,30 @@
-from termcolor import colored
-from datetime import datetime
+import argparse
+from lib.Scanner import *
+from lib.Crawler import *
+from lib.DNSprayer import *
+from lib.ConsoleHandler import *
 
-time_date = datetime.now().strftime("%H:%M:%S")
+def default_useragent():
+	return "Mozilla/5.0 (Linux; Android 12; SAMSUNG SM-A125F) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/19.0 Chrome/102.0.5005.125 Mobile Safari/537.36"
 
-class ConsoleHandler:
-    def __init__(self):
-        pass
+def main():
+	parser = argparse.ArgumentParser(description='')
+        parser.add_argument('--url', help='Specify the URL of the webpage to crawl.')
+        parser.add_argument('--ip', help='Specify the IP address or IP range to scan servers.')
+        parser.add_argument('--dns-enum', help='Specify a domain name without the "www" subdomain prefix for enumeration.')
+        parser.add_argument('--pdf-spider', help='Crawl all PDF files from a given URL using a spider.')
+        parser.add_argument('--useragent', default=default_useragent(), help='Specify a user-agent to be used.')
+	args = parser.parse_args()
 
-    def error(self, message):
-        print(colored('[-] ', 'red') + message)
+	if args.url:
+		crawler = Crawler(args.useragent)
+		crawler.start_crawler(args.url)
+	elif args.ip:
+		scanner = Scanner()
+		scanner.start_scanner(args.ip, args.useragent)
+	elif args.dns_enum:
+		dns_enumeration = DNSprayer()
+		dns_enumeration.start_dns_enumeration(args.dns_enum)
 
-    def success(self, message):
-        print(colored('[+] ', 'green') + message)
-
-    def info(self, ip_address, server_name, response_code):
-        print(colored('[*] ', 'yellow') + colored(ip_address, 'cyan') + f" [{server_name}] [{response_code}]")
-
-    def more_info(self, subdomain_url_response_url):
-        print(colored('[' + time_date + '] ', 'cyan') + colored('[INFO] ', 'green') + colored(subdomain_url_response_url, 'white'))
+if __name__ == "__main__":
+	main()
